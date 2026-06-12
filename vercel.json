@@ -1,7 +1,4 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "tanstack-start",
-  "serverless": false,
-  "nodeVersion": "22"
+  "outputDirectory": "dist"
 }
