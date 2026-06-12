@@ -13,6 +13,7 @@ export default defineConfig({
     server: { entry: "server" },
   },
   nitro: {
+    preset: "node-server",
     prerender: {
       crawlLinks: false,
       routes: ["/"],
