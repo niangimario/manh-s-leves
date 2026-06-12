@@ -1,0 +1,15 @@
+name = "manh-s-leves"
+type = "service"
+main = "dist/server/server.js"
+
+[env.production]
+routes = [
+  { pattern = "manh-s-leves.pages.dev", zone_name = "pages.dev" }
+]
+
+[build]
+command = "npm run build"
+cwd = "."
+
+[build.upload]
+format = "modules"
