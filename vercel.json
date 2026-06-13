@@ -6,8 +6,8 @@
     }
   },
   "rewrites": [
+    { "source": "/assets/(.*)", "destination": "/client/assets/$1" },
     { "source": "/client/assets/(.*)", "destination": "/client/assets/$1" },
-    { "source": "/assets/(.*)", "destination": "/assets/$1" },
     { "source": "/(.*)", "destination": "/api" }
   ]
 }
