@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "buildCommand": "npm run build && mkdir -p .vercel/output && cp -r .output/. .vercel/output/ || true",
+  "outputDirectory": ".vercel/output",
   "framework": null
 }
