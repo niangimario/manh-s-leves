@@ -1,0 +1,4 @@
+{
+  "buildCommand": "node postbuild.js",
+  "outputDirectory": ".vercel/output"
+}
