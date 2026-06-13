@@ -1,5 +1,10 @@
 {
-  "buildCommand": "npm run build && mkdir -p .vercel/output && cp -r .output/. .vercel/output/ || true",
+  "buildCommand": "node scripts/vercel-build.js",
   "outputDirectory": ".vercel/output",
-  "framework": null
+  "framework": null,
+  "functions": {
+    "dist/server/**": {
+      "runtime": "nodejs20.x"
+    }
+  }
 }
