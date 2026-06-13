@@ -6,10 +6,7 @@ import { execSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-console.log('🔨 Building TanStack Start...');
-execSync('npm run build', { stdio: 'inherit' });
-
-console.log('📦 Copying assets to public...');
+console.log('� Copying client assets to public...');
 
 function copyRecursive(src, dest) {
   if (!fs.existsSync(dest)) {
@@ -29,7 +26,7 @@ function copyRecursive(src, dest) {
   });
 }
 
-// Copy dist/client to public
+// Copy dist/client to public (Vercel serves public as static)
 if (fs.existsSync('dist/client')) {
   fs.rmSync('public', { recursive: true, force: true });
   copyRecursive('dist/client', 'public');

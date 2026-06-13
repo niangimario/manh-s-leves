@@ -1,4 +1,5 @@
 {
-  "buildCommand": "node postbuild.js",
-  "outputDirectory": ".vercel/output"
+  "rewrites": [
+    { "source": "/((?!.*\\.).*)", "destination": "/api" }
+  ]
 }
