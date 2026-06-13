@@ -32,3 +32,5 @@ public/
 *.njsproj
 *.sln
 *.sw?
+server/
+api/server/
