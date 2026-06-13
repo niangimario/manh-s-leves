@@ -53,13 +53,13 @@ try {
     console.warn('⚠️ dist/client not found (this is OK on first build)');
   }
 
-  // Copy dist/server to api/server
+  // Copy dist/server to server/ to avoid creating nested functions under api/
   if (fs.existsSync('dist/server')) {
-    if (fs.existsSync('api/server')) {
-      fs.rmSync('api/server', { recursive: true, force: true });
+    if (fs.existsSync('server')) {
+      fs.rmSync('server', { recursive: true, force: true });
     }
-    if (copyRecursive('dist/server', 'api/server')) {
-      console.log('✅ Server files copied to api/server');
+    if (copyRecursive('dist/server', 'server')) {
+      console.log('✅ Server files copied to server/');
     }
   } else {
     console.error('❌ dist/server not found!');

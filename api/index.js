@@ -1,6 +1,6 @@
 let server;
 try {
-  const serverDefault = await import('./server/server.js');
+  const serverDefault = await import('../server/server.js');
   server = serverDefault.default || serverDefault;
 } catch (importError) {
   console.error('[API] Failed to import server:', importError.message);
