@@ -1,5 +1,10 @@
 {
+  "functions": {
+    "api/[...slug].js": {
+      "maxDuration": 30
+    }
+  },
   "rewrites": [
-    { "source": "/:path*", "destination": "/api/:path*" }
+    { "source": "/(.*)", "destination": "/api/$1" }
   ]
 }

@@ -1,20 +1,37 @@
-import serverDefault from './server/server.js';
-
-const server = serverDefault.default || serverDefault;
+let server;
+try {
+  const serverDefault = await import('./server/server.js');
+  server = serverDefault.default || serverDefault;
+} catch (importError) {
+  console.error('[API] Failed to import server:', importError.message);
+  // Create an error handler that returns the import error details
+  server = {
+    fetch: async () => {
+      return new Response(
+        JSON.stringify({
+          error: 'Server import failed',
+          details: importError.message,
+          type: importError.constructor.name
+        }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+  };
+}
 
 export default async function handler(req, res) {
   try {
+    console.log(`[API] Request: ${req.method} ${req.url}`);
+
     // Extract the original path from the rewritten URL
-    // When rewrite /(.*) → /api/$1 happens, req.url will be /api/original-path
-    // We need to strip the /api prefix to get the original path
     let pathname = req.url || '/';
     if (pathname.startsWith('/api')) {
-      pathname = pathname.slice(4) || '/'; // Remove /api prefix, default to / if empty
+      pathname = pathname.slice(4) || '/';
     }
     
-    console.log(`[API] Handler: method=${req.method}, original_path=${pathname}`);
+    console.log(`[API] Routing to: ${pathname}`);
 
-    // Create fetch request with original path
+    // Create fetch request
     const url = new URL(pathname, `http://${req.headers.host}`);
     const fetchReq = new Request(url, {
       method: req.method,
@@ -25,12 +42,12 @@ export default async function handler(req, res) {
     // Call TanStack Start server
     const fetchRes = await server.fetch(fetchReq, {}, {});
 
-    console.log(`[API] Response: ${fetchRes.status} for ${pathname}`);
+    console.log(`[API] Response: ${fetchRes.status}`);
 
     // Send response
     res.status(fetchRes.status);
     
-    // Copy response headers (skip content-encoding to avoid conflicts)
+    // Copy response headers
     fetchRes.headers.forEach((value, key) => {
       if (key.toLowerCase() !== 'content-encoding') {
         res.setHeader(key, value);
@@ -39,7 +56,11 @@ export default async function handler(req, res) {
 
     res.send(await fetchRes.text());
   } catch (error) {
-    console.error('[API] Server error:', error);
-    res.status(500).json({ error: 'Internal server error', details: error.message });
+    console.error('[API] Handler error:', error);
+    res.status(500).json({ 
+      error: 'Handler error',
+      message: error.message,
+      stack: error.stack
+    });
   }
 }
