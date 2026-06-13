@@ -1,10 +1,5 @@
 {
   "buildCommand": "node scripts/vercel-build.js",
   "outputDirectory": ".vercel/output",
-  "framework": null,
-  "functions": {
-    "dist/server/**": {
-      "runtime": "nodejs20.x"
-    }
-  }
+  "framework": null
 }
