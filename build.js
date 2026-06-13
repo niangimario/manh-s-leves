@@ -2,11 +2,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { execSync } from 'child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-console.log('� Copying client assets to public...');
 
 function copyRecursive(src, dest) {
   if (!fs.existsSync(dest)) {
@@ -30,8 +27,12 @@ function copyRecursive(src, dest) {
 if (fs.existsSync('dist/client')) {
   fs.rmSync('public', { recursive: true, force: true });
   copyRecursive('dist/client', 'public');
-  console.log('✅ Assets copied to public/');
-} else {
-  console.error('❌ dist/client not found!');
-  process.exit(1);
+  console.log('Assets copied to public/');
+}
+
+// Copy dist/server to api/server (Serverless function needs it)
+if (fs.existsSync('dist/server')) {
+  fs.rmSync('api/server', { recursive: true, force: true });
+  copyRecursive('dist/server', 'api/server');
+  console.log('Server files copied to api/server');
 }

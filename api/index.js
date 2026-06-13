@@ -1,4 +1,4 @@
-import serverDefault from '../dist/server/server.js';
+import serverDefault from './server/server.js';
 
 const server = serverDefault.default || serverDefault;
 
