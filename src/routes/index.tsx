@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/button";
 import { UrgencyTimer } from "@/components/UrgencyTimer";
 import heroImg from "@/assets/hero-breakfast.jpg";
 import bookImg from "@/assets/breakfast-table.jpg";
-import proof1 from "@/assets/transformacao-1.png.asset.json";
-import proof2 from "@/assets/transformacao-2.png.asset.json";
-import proof3 from "@/assets/transformacao-3.png.asset.json";
-import capaLivro from "@/assets/capa-livro.png.asset.json";
-import bonus1 from "@/assets/bonus-1.png.asset.json";
-import bonus2 from "@/assets/bonus-2.png.asset.json";
+import proof1 from "@/assets/transformacao-1.jpg";
+import proof2 from "@/assets/transformacao-2.jpg";
+import proof3 from "@/assets/transformacao-3.jpg";
+import capaLivro from "@/assets/livre-100.jpg";
+import bonus1 from "@/assets/bonus-1.jpg";
+import bonus2 from "@/assets/bonus-2.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -159,7 +159,7 @@ function Index() {
         <div className="grid md:grid-cols-3 gap-6">
           {[proof1, proof2, proof3].map((p, i) => (
             <div key={i} className="rounded-2xl overflow-hidden border border-border bg-card shadow-[var(--shadow-soft)]">
-              <img src={p.url} alt={`Transformation réelle #${i + 1}`} loading="lazy"
+              <img src={p} alt={`Transformation réelle #${i + 1}`} loading="lazy"
                 decoding="async" width={600} height={800}
                 className="w-full h-full object-cover aspect-[3/4]" />
             </div>
@@ -180,8 +180,8 @@ function Index() {
           </div>
           <div className="grid md:grid-cols-2 gap-8">
             {[
-              { img: bonus1.url, title: "15 Erreurs qui T'Empêchent de Maigrir", old: "19 €", tag: "Bonus #1" },
-              { img: bonus2.url, title: "20 Exercices à la Maison qui Accélèrent la Perte de Poids", old: "12 €", tag: "Bonus #2" },
+              { img: bonus1, title: "15 Erreurs qui T'Empêchent de Maigrir", old: "19 €", tag: "Bonus #1" },
+              { img: bonus2, title: "20 Exercices à la Maison qui Accélèrent la Perte de Poids", old: "12 €", tag: "Bonus #2" },
             ].map((b) => (
               <div key={b.title} className="bg-card rounded-3xl p-6 border border-border shadow-[var(--shadow-soft)] flex flex-col items-center text-center">
                 <span className="inline-block text-xs font-bold uppercase tracking-wider text-primary bg-primary/10 rounded-full px-3 py-1 mb-4">{b.tag}</span>
@@ -226,7 +226,7 @@ function Index() {
       <section id="comprar" className="py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="text-center mb-10">
-            <img src={capaLivro.url} alt="Couverture du livre 100 Recettes Matinales"
+            <img src={capaLivro} alt="Couverture du livre 100 Recettes Matinales"
               loading="lazy" decoding="async" width={448} height={448}
               className="mx-auto mb-6 w-40 sm:w-48 md:w-56 drop-shadow-2xl" />
             <p className="text-sm sm:text-base font-bold uppercase tracking-wider text-primary mb-3">Choisissez un forfait</p>
